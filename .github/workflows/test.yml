@@ -10,9 +10,6 @@ jobs:
   test-on-illumos:
     name: illumos test with rust
     runs-on: macos-latest
-    strategy:
-      matrix:
-        target: ["x86_64-unknown-illumos"]
     steps:
     - uses: actions/checkout@master
     - name: Run check
@@ -20,9 +17,8 @@ jobs:
       with:
         mem: 7168
         prepare: |
-          curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal
+          pkg install build-essential
+          curl https://sh.rustup.rs -sSf | bash -s -- -y --profile minimal
         run: |
-          set path=($HOME/.cargo/bin $path)
-          cargo install cargo-hack
-          cargo hack test --feature-powerset --target ${{ matrix.target }}
-          cargo hack test --feature-powerset --release --target ${{ matrix.target }}
+          source "$HOME/.cargo/env"
+          cargo test
