@@ -5,6 +5,7 @@ on:
             - '**.md'
         branches:
             - main
+     workflow_dispatch:
 
 jobs:
   test-on-illumos:
