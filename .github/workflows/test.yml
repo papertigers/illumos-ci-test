@@ -7,7 +7,6 @@ on:
             - master
     workflow_dispatch:
 
-
 jobs:
   test-on-illumos:
     name: illumos test with rust
